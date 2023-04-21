@@ -1,0 +1,24 @@
+<h2>Sign Up</h2>
+
+<%= form_with(model: @user) do |form| %>
+
+  <% if flash[:notice] %>
+    <div>
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+  
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <br/>
+  <%= form.label :email %>
+  <%= form.email_field :email %>
+  <br/>
+  <%= form.label :password %>
+  <%= form.password_field :password %>
+  <br/>
+  <%= form.label :password_confirmation %>
+  <%= form.password_field :password_confirmation %>
+  <br/>
+  <%= form.submit 'Sign up'%>
+<% end %>
