@@ -11,6 +11,7 @@
         <tr>
             <th>Name</th>
             <th>Description</th>
+            <th>Creator</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -19,9 +20,10 @@
             <tr>
                 <td><%= project.name %></td>
                 <td><%= project.description %></td>
+                <td><%= project.user.name %></td>
                 <td>
                     <%= link_to 'Edit', edit_project_path(project) %>
-                    <%= link_to 'Delete', project_path(project), method: :delete, data: { confirm: 'Are you sure?' } %>
+                    <%= link_to 'Delete', project_path(project), data: {turbo_method: :delete, turbo_confirm: "Are You Sure ?"} %>
                 </td>
             </tr>
         <%end%>

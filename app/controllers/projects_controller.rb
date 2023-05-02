@@ -1,8 +1,8 @@
 class ProjectsController < ApplicationController
     include SessionsHelper
 
-    before_action :authorize_manager_or_admin, only: [:edit, :update, :index, :new, :create, :destroy]
-    before_action :authorize_user, only: [:show ]
+    before_action :authorize_manager_or_admin, only: [:edit, :update, :index, :new, :create]
+    before_action :authorize_creator, only: [:destroy ]
      
 
     def index
@@ -31,8 +31,9 @@ class ProjectsController < ApplicationController
     end
 
     def update
+        @project = Project.find(params[:id])
         if @project.update(project_params)
-            redirect_to @project, notice: "Project is successfully updated"
+            redirect_to projects_url, notice: "Project is successfully updated"
         else
             render :edit
         end
@@ -41,7 +42,7 @@ class ProjectsController < ApplicationController
     def destroy
         @project=Project.find(params[:id])
         @project.destroy
-        redirected_to projects_url, notice: "Project was successfully destroyed"
+        redirect_to projects_url, notice: "Project was successfully destroyed"
     end
 
     private
@@ -62,8 +63,9 @@ class ProjectsController < ApplicationController
         end
     end
 
-    def authorize_user
-        unless current_user.id==@project.user_id || current_user.manager? || current_user.admin?
+    def authorize_creator
+        @project=Project.find(params[:id])
+        unless current_user.id==@project.user_id && current_user.manager? || current_user.admin?
             redirect_to root_url, notice: "Access denied"
         end
     end

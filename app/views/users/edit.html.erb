@@ -1,6 +1,6 @@
 <h1>Edit User</h1>
 
-<%= form_with(model: @user) do |form| %>
+<%= form_for @user do |form| %>
   <% if flash[:notice] %>
     <div>
       <%= flash[:notice] %>
@@ -8,8 +8,7 @@
   <% end %>
 
   <%= form.label :role %>
-  <%= form.select :role, User.roles.keys, include_blank: true %>
-  <%= form.hidden_field :role, value: @user.role %>
-
+  <%= form.select :role, User.roles.keys%>
+  
   <%= form.submit "Update User" %>
 <% end %>

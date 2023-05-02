@@ -2,17 +2,6 @@
 
 <%= form_with model: @project, url: projects_path do |form| %>
 
-  <% if @project.errors.any? %>
-    <div >
-      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
-      <ul>
-      <% @project.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div>
     <%= form.label :name %>
     <%= form.text_field :name %>

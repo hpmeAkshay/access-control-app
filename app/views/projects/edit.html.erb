@@ -1,0 +1,21 @@
+<!-- app/views/projects/edit.html.erb -->
+
+<h1>Edit Project</h1>
+
+<%= form_for @project do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name%>
+  </div>
+
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description%>
+  </div>
+
+  <div>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+  </div>
+
+  <%= f.submit 'Save'%>
+<% end %>
